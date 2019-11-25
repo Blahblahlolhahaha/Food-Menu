@@ -1,0 +1,201 @@
+# Name : Jess Kwek
+# Class: DISM/FT/1B/02
+
+#:import hex kivy.utils.get_color_from_hex
+#:import resource kivy.resources.resource_find
+Bigboss:
+	Login:
+	Register:
+	Menu:
+	Maininterface:
+	Buy:
+	Thank_you:
+<Comic@Label>:
+	bold: True
+	font_size: "20sp"
+	color: 0,0,0,1
+
+
+<Inputstuff@TextInput>:
+	size_hint:0.8,0.8
+	pos_hint: {"x":0.1}
+	multiline: False
+
+
+<RandompopupLabel@Label>:
+	size_hint: (0.8,0.8)
+
+
+<Buy>:
+	name:"Buy"
+<Maininterface>:
+	name:"interface"
+<Login>:
+	canvas:
+		Color:
+			rgba:0.01,0.6,0.9,1
+		Rectangle:
+			pos: self.pos
+			size: self.size
+	name: "login"
+	username: namee
+	password: password
+	FloatLayout:
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		size_hint: 0.8,0.6
+		pos_hint: {"x":0.1,"top":0.8}
+		BoxLayout:
+			spacing:20
+			orientation: "vertical"
+			size_hint: 0.9, 0.9
+			pos_hint: {"x":0.05,"top":0.95}
+			Comic:
+				text: 'Welcome to Spam!'
+			Inputstuff:
+				id: namee
+				hint_text: "Username"
+			Inputstuff:
+				id: password
+				hint_text: "Password"
+				password: True
+			GridLayout:
+				size_hint:0.8,0.8
+				pos_hint: {"x":0.1}
+				cols:2
+				Button:
+					background_color: 0,0,0,0
+					canvas.before:
+						Color:
+							rgba: (0.98,0.55,0.35,1)
+						RoundedRectangle:
+							pos: self.pos
+							size: self.size
+							radius: [20,]
+					text:"Login!"
+					on_release:
+						root.login()
+				Button:
+					background_color: 0,0,0,0
+					canvas.before:
+						Color:
+							rgb: hex("#228B22")
+						RoundedRectangle:
+							pos: self.pos
+							size: self.size
+							radius: [20,]
+					text:"Register!"
+					on_release:
+						root.register()	
+<Register>:
+	name: "register"
+	namee: namee
+	email: email
+	password1: password1
+	password2: password2
+	canvas:
+		Color:
+			rgba:0.01,0.6,0.9,1
+		Rectangle:
+			pos: self.pos
+			size: self.size
+	FloatLayout:
+		canvas:
+			Color:
+				rgba:1,1,1,1
+			Rectangle:
+				pos: self.pos
+				size: self.size
+		size_hint: 0.9,0.8
+		pos_hint: {"x":0.05,"top":0.9}
+		BoxLayout:
+			size_hint: 0.9, 0.9
+			pos_hint: {"x":0.05,"top":0.95}
+			orientation:"vertical"
+			spacing:20
+			Inputstuff:
+				id: namee
+				hint_text:"Username"
+			Inputstuff:
+				id: email
+				hint_text:"Email"
+			Inputstuff:
+				id: password1
+				password: True
+				hint_text:"Password"
+			Inputstuff:
+				id: password2
+				password: True
+				hint_text:"Confirm Password"
+			GridLayout:
+				cols:2
+				Button:
+					text: "Submit"
+					on_release:
+						root.check_validity()
+				Button:
+					text: "Cancel"
+					on_release:
+						root.cancel()
+
+<NavigationMenu>:
+	name:"navigate"
+<Fail>:
+	RandompopupLabel:
+		text: "Wrong username and/or password!!!!"
+<Menu>:
+	name: "Menu"
+	Label:
+		text:"Hello world!"
+<Success>:
+	RandompopupLabel:
+		text: "Success!"
+<Fail>:
+	RandompopupLabel:
+		text: "An error has occured, please try again later."
+<User_exists>:
+	RandompopupLabel:
+		text: "This username/email already exist!"
+<Zero_quantity>:
+	RandompopupLabel:
+		text: "Quantity cannot be zero!"
+<Confirm>:
+	BoxLayout:
+		orientation:"vertical"
+		RandompopupLabel:
+			text: "This food already exists in your cart, would you like to overwrite?"
+		GridLayout:
+			cols:2
+			Button:
+				text: "Yes"
+				on_release:
+					root.overwrite()
+			Button:
+				text: "No"
+				on_release:
+					root.cancel()
+<Thank_you>:
+	name: "thankyou"
+	canvas:
+		Color:
+			rgba:0.01,0.6,0.9,1
+		Rectangle:
+			pos: self.pos
+			size: self.size
+	BoxLayout:
+		orientation:"vertical"
+		Label:
+			text:"Thank you for using SPAM! We hope to see you again!"
+			size_hint: 1,0.8
+		Button:
+			background_normal:""
+        	background_color: (0.82, 0.10, 0.16, 1)
+			size_hint: 0.2,0.2
+			pos_hint:{"x":0.4} 
+			text:"Press here to exit"
+			on_release:
+				app.stop()
